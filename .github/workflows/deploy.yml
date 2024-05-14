@@ -13,17 +13,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Transfer files to 192.168.88.66
+      - name: Transfer files to .66 server
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOSTNAME }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASSWORD }}
           source: './publish'
           target: '/home/debian'
+          
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: SSH into .66 server
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.HOST_USERNAME }}
+            password: ${{ secrets.HOST_PASSWORD }}
+            port: ${{ secrets.HOST_PORT }}
+            script: |
+              sudo systemctl restart cqrsapp2.service 
+              sudo systemctl restart nginx.service
+              
+
