@@ -16,9 +16,9 @@ jobs:
       - name: Transfer files to .66 server
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.HOST_USERNAME }}
-          password: ${{ secrets.HOST_PASSWORD }}
+          host: "192.168.88.66"
+          username: "debian"
+          password: "  "
           source: './publish'
           target: '/home/debian'
           
