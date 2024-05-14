@@ -30,7 +30,7 @@ jobs:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.HOST_USERNAME }}
             password: ${{ secrets.HOST_PASSWORD }}
-            port: ${{ secrets.HOST_PORT }}
+            port: ${{ secrets.SERVER_PORT }}
             script: |
               sudo systemctl restart cqrsapp2.service 
               sudo systemctl restart nginx.service
